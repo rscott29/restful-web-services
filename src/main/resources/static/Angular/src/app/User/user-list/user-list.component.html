@@ -1,0 +1,80 @@
+<div class="bounds">
+
+  <div class="content"
+       fxFlexFill
+       fxLayout="row"
+       fxLayout.xs="column"
+       fxLayoutGap="50px">
+
+    <div class="left" fxFlex="30" fxFlex.xs="55">
+      <app-add-user></app-add-user>
+    </div>
+
+    <div fxFlex="30" fxFlex.xs="55">
+
+      <nb-flip-card #flip>
+
+        <nb-card-front>
+
+          <nb-card size="small" status="primary">
+            <nb-card-header>Manage Users</nb-card-header>
+            <nb-card-body>
+              <input
+                [formControl]="filter"
+                [nbAutocomplete]="autoControl"
+                nbInput
+                placeholder="Select a User"
+                shape="round"
+                type="text"/>
+
+              <nb-autocomplete #autoControl>
+
+                <nb-option *ngFor="let user of filteredUsers$ | async" [value]=" user.name">
+                  {{ user.name }}
+
+                </nb-option>
+              </nb-autocomplete>
+            </nb-card-body>
+          </nb-card>
+        </nb-card-front>
+        <nb-card-back>
+          <nb-card size="small" status="primary">
+            <nb-card-header>Edit Users</nb-card-header>
+
+            <nb-card-body>
+              <ng-container *ngFor="let user of filteredUsers$ | async">
+                <form [formGroup]="userEditForm">
+                <div class="input-group">
+                  <input formControlName="editName" [value]="user.name" id="editName" nbInput shape="round" type="text" />
+                </div>
+                <div class="input-group">
+                  <input formControlName="editBirthDate"  [value]="user.birthDate | date" id="editBirthDate" nbInput shape="round" type="text"/>
+                </div>
+                  <div class="mt-50"></div>
+                <button class="button" (click)="update(user)" nbButton status="primary">Edit</button>
+                  <button class="button" (click)="delete(user.id)" nbButton status="primary">Delete</button>
+                </form>
+              </ng-container>
+
+            </nb-card-body>
+          </nb-card>
+        </nb-card-back>
+      </nb-flip-card>
+
+    </div>
+
+    <div class="left" fxFlex="20">
+      <nb-card id="user-list" size="small">
+        <nb-list>
+          <nb-list-item *ngFor="let user of $users | async">
+            <nb-user [badgeStatus]="'success'" [name]="user.name" [title]="user.birthDate | date">
+            </nb-user>
+            <ul>
+              <li class="status open"></li>
+            </ul>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+  </div>
+</div>

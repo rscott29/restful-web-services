@@ -1,0 +1,37 @@
+<nb-layout>
+  <nb-layout-header subheader>
+    <div *ngIf="!isCompact"  class="logo">
+      <img alt="logo" class="logo-container" src="./assets/logo_transparent.png">
+    </div>
+
+    <nb-actions class="right" size="small">
+      <nb-action (click)="toggleCompact()" icon="menu-arrow-outline">
+
+      </nb-action>
+    </nb-actions>
+    <nb-actions class="left" size="small">
+      <nb-action icon="search-outline"></nb-action>
+      <nb-action icon="power-outline"></nb-action>
+      <nb-action icon="person-outline"></nb-action>
+      <nb-action icon="home-outline"></nb-action>
+      <nb-action [icon]="disabledIconConfig" disabled></nb-action>
+
+    </nb-actions>
+
+  </nb-layout-header>
+
+
+  <nb-sidebar state="compacted" (mouseover)="toggleCompact()" (mouseout)="toggleCompact()">
+
+    <nb-menu  [items]="items" class="mt-50">
+
+    </nb-menu>
+
+  </nb-sidebar>
+
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+
+
+  </nb-layout-column>
+</nb-layout>

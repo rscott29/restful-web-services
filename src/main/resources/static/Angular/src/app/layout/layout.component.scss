@@ -1,0 +1,32 @@
+@import '../../themes';
+.left {
+  margin-left: auto;
+}
+
+li {
+  border-bottom: none!important;
+}
+nb-layout-header  {
+
+  background: nb-theme( color-white);
+}
+
+nb-sidebar  {
+  background: nb-theme( color-primary-600);
+
+}
+.mt-50{
+  margin-top: 50px;
+}
+.menu-item {
+  border-bottom:  nb-theme(menu-item-divider-style)
+
+
+}
+.logo-container {
+  max-width: 150px;
+  max-height: 141px;
+  position: fixed;
+  left: 53px;
+  top: 0;
+}

@@ -33,7 +33,7 @@ public class UserJpaController {
     public List<User> retrieveAllUsers() {
         return userRepository.findAll();
     }
-
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = "Location")
     @GetMapping("/jpa/users/{id}")
     public EntityModel<User> retrieveUser(@PathVariable int id) {
         final Optional<User> user = userRepository.findById(id);
@@ -72,13 +72,12 @@ public class UserJpaController {
     @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = "Location")
     @PostMapping("/jpa/users")
     public User createUser(@Valid @RequestBody User user) {
-        User savedUser = userRepository.save(user);
-//        URI location = ServletUriComponentsBuilder
+        //        URI location = ServletUriComponentsBuilder
 //                .fromCurrentRequest()
 //                .path("/{id}")
 //                .buildAndExpand(savedUser.getId()).toUri();
 
-        return savedUser;
+        return userRepository.save(user);
     }
 
     @GetMapping("/jpa/users/{id}/posts")

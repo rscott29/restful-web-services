@@ -20,12 +20,12 @@ export class UserService {
     return this.http.get<User[]>(`${this.baseUrl}/users`).subscribe(data => {
       this.dataStore.users = data;
       this._users.next(Object.assign({}, this.dataStore).users);
-      this.log(`loaded all users`)
+   //   this.log(`loaded all users`)
     }, catchError(this.handleError<User[]>('loadAllUsers', [])))
   }
 
   load(id: number | string) {
-    this.http.get<User>(`${this.baseUrl}/users/${id}`).subscribe(data => {
+   this.http.get<User>(`${this.baseUrl}/users/${id}`).subscribe(data => {
       let notFound = true;
 
       this.dataStore.users.forEach((item, index) => {
@@ -57,15 +57,18 @@ export class UserService {
       this.dataStore.users.forEach((t, i) => {
         if (t.id === data.id) {
           this.dataStore.users[i] = data;
+
         }
+
       });
 
       this._users.next(Object.assign({}, this.dataStore).users);
+      this.log(`successfully updated ${data.name}`)
     }, catchError(this.handleError<User[]>('updateUser', [])))
   }
 
   remove(userId: number) {
-    this.http.delete(`${this.baseUrl}/users/${userId}`).subscribe(response => {
+    this.http.delete(`${this.baseUrl}/users/${userId}`).subscribe(() => {
       this.dataStore.users.forEach((t, i) => {
         if (t.id === userId) {
           this.dataStore.users.splice(i, 1);
@@ -91,6 +94,6 @@ export class UserService {
   }
 
   private log(message: string) {
-    this.messageService.add(`UserService: ${message}`);
+    this.messageService.sendMessage(message);
   }
 }

@@ -37,7 +37,11 @@ export class LayoutComponent implements OnInit {
 
   toggleCompact() {
     this.sidebarService.toggle(true, 'left');
+
     this.isCompact = !this.isCompact
+
+   // this.isCompact = !this.isCompact
+
   }
 
 

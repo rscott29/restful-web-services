@@ -1,25 +1,40 @@
-
 <nb-card status="primary" size="small">
-  <nb-card-header>Add New User</nb-card-header>
-  <nb-card-body>
-    <form [formGroup]="userForm" class="example-form">
-      <div class="input-group error" [ngClass]="{'error': userForm.controls.name.invalid &&  userForm.controls.name.dirty}">
-      <input id="input-username" nbInput placeholder="Name" shape="round" type="text" formControlName="name">
-      </div>
-      <div *ngIf="checkError('name', 'required') &&  userForm.controls.name.dirty" class="error-message">Name is Required</div>
-      <div *ngIf="checkError('name', 'minlength')" class="error-message">Must be more than 2 characters</div>
-      <div class="input-group error" [ngClass]="{'error': userForm.controls.birthDate.invalid &&  userForm.controls.birthDate.dirty}">
-      <input [nbDatepicker]="datepicker" id="input-birthdate" nbInput placeholder="Date Of Birth" shape="round"
-             type="text" formControlName="birthDate" >
+    <nb-card-header>Add New User</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="userForm" class="example-form">
+            <div class="input-group error"
 
-      <nb-datepicker #datepicker></nb-datepicker>
-        <div *ngIf="checkError('birthDate', 'required') &&  userForm.controls.birthDate.dirty" class="error-message">Birth Date is Required</div>
-        <div *ngIf="checkError('birthDate', 'maxDate')" class="error-message">Birth Date cannot be in the future</div>
-      </div>
-    </form>
-    <div class="mt-50"></div>
-    <button (click)="add()" [disabled]="userForm.invalid" nbButton status="primary">Create</button>
-  </nb-card-body>
+                 [ngClass]="{'error': userForm.controls.name.invalid &&  userForm.controls.name.dirty}">
+                <label>
+                <input id="input-username" nbInput placeholder="Name" shape="round" type="text" formControlName="name">
+                 </label>
+            </div>
+            <div *ngIf="checkError('name', 'required') &&  userForm.controls.name.dirty" class="error-message">Name is
+                Required
+            </div>
+            <div *ngIf="checkError('name', 'minlength')" class="error-message">Must be more than 2 characters</div>
+
+            <div class="input-group error"
+                 [ngClass]="{'error': userForm.controls.birthDate.invalid &&  userForm.controls.birthDate.dirty}">
+                <label>
+
+
+                <input [nbDatepicker]="datepicker" id="input-birthdate" nbInput placeholder="Date Of Birth"
+                       shape="round"
+                       type="text" formControlName="birthDate">
+                </label>
+                <nb-datepicker #datepicker></nb-datepicker>
+                <div *ngIf="checkError('birthDate', 'required') &&  userForm.controls.birthDate.dirty"
+                     class="error-message">Birth Date is Required
+                </div>
+                <div *ngIf="checkError('birthDate', 'maxDate')" class="error-message">Birth Date cannot be in the
+                    future
+                </div>
+            </div>
+        </form>
+        <div class="mt-50"></div>
+        <button (click)="add()" [disabled]="userForm.invalid" nbButton status="primary">Create</button>
+    </nb-card-body>
 
 </nb-card>
 

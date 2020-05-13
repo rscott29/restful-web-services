@@ -1,8 +1,6 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
-import {UserService} from "./user.service";
-import {Observable} from "rxjs";
-import {User} from "./User";
+
 
 @Component({
   selector: 'app-user',
@@ -12,11 +10,8 @@ import {User} from "./User";
 export class UserComponent implements OnInit {
 
 
-  constructor(private userService: UserService) {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
 }

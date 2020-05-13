@@ -12,18 +12,23 @@ import {Subscription} from "rxjs";
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit, OnDestroy{
+
   userForm: FormGroup;
   message: any = {};
   subscription: Subscription
-  constructor(private userService: UserService, private fb: FormBuilder, private toastrService: NbToastrService, private messageService: MessageService) {
-  }
+
+  constructor(
+      private userService: UserService,
+      private fb: FormBuilder,
+      private toastrService: NbToastrService,
+      private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
-      'name':  ['', [Validators.required, Validators.minLength(2)]],
+      'name':  ['', [Validators.required, Validators.minLength(3)]],
       'birthDate': ['', [Validators.required, CustomValidators.maxDate(Date.now()) ]]
     });
-
   }
 
   add(): void {
@@ -40,7 +45,6 @@ export class AddUserComponent implements OnInit, OnDestroy{
           this.message.text || 'Success',
           `Success`,
           {position, status});
-
     })
   }
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-package com.in28minutes.rest.webservices.restfulwebservices.user;
+package com.scottTech.rest.webservices.userservice.user;
 
 
 import io.swagger.annotations.ApiModel;

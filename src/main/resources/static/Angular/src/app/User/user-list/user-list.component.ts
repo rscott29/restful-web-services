@@ -15,7 +15,7 @@ import {MessageService} from "../../message/message.service";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
-    @ViewChild(NbFlipCardComponent) flip: NbFlipCardComponent;
+    @ViewChild(NbFlipCardComponent) flipCard: NbFlipCardComponent;
     @ViewChild(NbAutocompleteComponent) searchBox: NbAutocompleteComponent<any>;
 
     $users: Observable<User[]>
@@ -53,11 +53,11 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        this.flip.showToggleButton = false;
+        this.flipCard.showToggleButton = false;
         this.searchBox.selectedChange.subscribe(() => {
 
-            this.flip.toggle();
-            this.flip.showToggleButton = true;
+            this.flipCard.toggle();
+            this.flipCard.showToggleButton = true;
 
         });
         this.filteredUsers$.subscribe((user) => {
@@ -72,13 +72,13 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
 
         user.name = this.userEditForm.controls['editName'].value;
         this.userService.update(user);
-        this.flip.toggle();
+        this.flipCard.toggle();
         this.showToast('top-left', 'success')
     }
 
     delete(id: number) {
         this.userService.remove(id);
-        this.flip.toggle();
+        this.flipCard.toggle();
     }
 
     showToast(position, status) {

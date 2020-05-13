@@ -5,16 +5,14 @@ import {User} from "./User";
 import {MessageService} from "../message/message.service";
 import {catchError} from "rxjs/operators";
 
-
 @Injectable()
 export class UserService {
   private _users = new BehaviorSubject<User[]>([]);
   readonly users = this._users.asObservable();
-  private baseUrl = 'http://localhost:8080/jpa';
+  private baseUrl = 'http://localhost:5000';
   private dataStore: { users: User[] } = {users: []};
 
-  constructor(private http: HttpClient, private messageService: MessageService) {
-  }
+  constructor(private http: HttpClient, private messageService: MessageService) {}
 
   loadAll() {
     return this.http.get<User[]>(`${this.baseUrl}/users`).subscribe(data => {
@@ -57,9 +55,7 @@ export class UserService {
       this.dataStore.users.forEach((t, i) => {
         if (t.id === data.id) {
           this.dataStore.users[i] = data;
-
         }
-
       });
 
       this._users.next(Object.assign({}, this.dataStore).users);
@@ -74,7 +70,6 @@ export class UserService {
           this.dataStore.users.splice(i, 1);
         }
       });
-
       this._users.next(Object.assign({}, this.dataStore).users);
     }, catchError(this.handleError<User[]>('removeUser', [])))
   }

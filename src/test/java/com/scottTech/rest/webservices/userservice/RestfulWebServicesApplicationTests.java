@@ -1,4 +1,4 @@
-package com.in28minutes.rest.webservices.restfulwebservices;
+package com.scottTech.rest.webservices.userservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

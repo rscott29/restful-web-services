@@ -1,4 +1,4 @@
-package com.in28minutes.rest.webservices.restfulwebservices.user;
+package com.scottTech.rest.webservices.userservice.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -16,25 +16,25 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-public class UserJpaController {
+public class UserController {
 
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     @Autowired
-    public UserJpaController(UserRepository userRepository, PostRepository postRepository) {
+    public UserController(UserRepository userRepository, PostRepository postRepository) {
 
         this.userRepository = userRepository;
         this.postRepository = postRepository;
     }
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/jpa/users")
+
+    @GetMapping("/users")
     public List<User> retrieveAllUsers() {
         return userRepository.findAll();
     }
-    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = "Location")
-    @GetMapping("/jpa/users/{id}")
+
+    @GetMapping("/users/{id}")
     public EntityModel<User> retrieveUser(@PathVariable int id) {
         final Optional<User> user = userRepository.findById(id);
         if (user.isEmpty())
@@ -44,14 +44,13 @@ public class UserJpaController {
         resource.add(linkTo.withRel("all-users"));
         return resource;
     }
-    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = "Location")
-    @DeleteMapping("/jpa/users/{id}")
+
+    @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id) {
         userRepository.deleteById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PutMapping("/jpa/users/{id}")
+    @PutMapping("/users/{id}")
     User updateUser(@RequestBody User newUser, @PathVariable Integer id) {
 
         return userRepository.findById(id)
@@ -69,8 +68,8 @@ public class UserJpaController {
                     return userRepository.save(newUser);
                 });
     }
-    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = "Location")
-    @PostMapping("/jpa/users")
+
+    @PostMapping("/users")
     public User createUser(@Valid @RequestBody User user) {
         //        URI location = ServletUriComponentsBuilder
 //                .fromCurrentRequest()

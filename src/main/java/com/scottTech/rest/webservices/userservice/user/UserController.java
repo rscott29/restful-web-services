@@ -79,7 +79,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @GetMapping("/jpa/users/{id}/posts")
+    @GetMapping("/users/{id}/posts")
     public List<Post> retrieveAllPostById(@PathVariable int id) {
         final Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
@@ -88,7 +88,7 @@ public class UserController {
         return userOptional.get().getPosts();
     }
 
-    @PostMapping("/jpa/users/{id}/posts")
+    @PostMapping("/users/{id}/posts")
     public ResponseEntity<Post> createPostById(@PathVariable int id, @RequestBody Post post) {
         final Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {

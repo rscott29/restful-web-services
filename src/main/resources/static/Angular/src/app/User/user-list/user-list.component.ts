@@ -71,6 +71,10 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
     update(user: User) {
 
         user.name = this.userEditForm.controls['editName'].value;
+        user.permissions = ['foo']
+        user.permissionList = ['something']
+        user.rolesList = ['faraer']
+        user.roles = ['bar']
         this.userService.update(user);
         this.flipCard.toggle();
         this.showToast('top-left', 'success')

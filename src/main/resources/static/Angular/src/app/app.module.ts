@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MessageComponent} from './message/message.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpResponse} from "@angular/common/http";
 import {AddUserComponent} from './User/add-user/add-user.component';
 import {UserListComponent} from './User/user-list/user-list.component';
 import {UserComponent} from "./User/user.component";
@@ -38,6 +38,17 @@ import {
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {LayoutComponent} from './layout/layout.component';
 import {MessageService} from "./message/message.service";
+import {AuthModule} from "./auth/auth.module";
+import {
+
+    NbAuthJWTToken,
+    NbAuthModule,
+    NbAuthService,
+    NbPasswordAuthStrategy, NbPasswordAuthStrategyOptions,
+    NbTokenService,
+
+} from "@nebular/auth";
+import {AuthInterceptor} from "./auth/auth.interceptor";
 
 
 @NgModule({
@@ -56,8 +67,31 @@ import {MessageService} from "./message/message.service";
         ReactiveFormsModule,
         CustomFormsModule,
         BrowserAnimationsModule,
+        AuthModule,
         FlexLayoutModule,
         FormsModule,
+        NbAuthModule.forRoot({
+            strategies: [
+                NbPasswordAuthStrategy.setup({
+                    name: 'email',
+                    baseEndpoint: 'http://localhost:5000',
+                    login: {
+
+                        endpoint: '/login',
+                        redirect: {
+                            success: '/home/users',
+                           // failure: '/register',
+                        }
+                    },
+                    token: {
+                        class: NbAuthJWTToken ,
+                        getter: (module: string, res: HttpResponse<Object>) => res.headers.get('Authorization'),
+                        key: 'token',
+                    }
+                }),
+            ],
+            forms: {},
+        }),
         NbThemeModule.forRoot({name: 'corporate'}),
         NbMenuModule.forRoot(),
         NbEvaIconsModule,
@@ -76,12 +110,17 @@ import {MessageService} from "./message/message.service";
         NbUserModule,
         NbDatepickerModule.forRoot(),
         NbToastrModule.forRoot(),
-        NbAutocompleteModule
+        NbAutocompleteModule,
+
     ],
     providers: [
+       {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
         UserService,
         NbSidebarService,
-        MessageService
+        MessageService,
+        NbAuthService,
+        NbTokenService,
+
     ],
     bootstrap: [AppComponent]
 })

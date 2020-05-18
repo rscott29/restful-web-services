@@ -18,10 +18,11 @@ export class UserService {
     return this.http.get<User[]>(`${this.baseUrl}/users`).subscribe(data => {
       this.dataStore.users = data;
       this._users.next(Object.assign({}, this.dataStore).users);
-   //   this.log(`loaded all users`)
-    }, catchError(this.handleError<User[]>('loadAllUsers', [])))
-  }
 
+
+    // }, catchError(this.handleError<User[]>('loadAllUsers', [])))
+  })
+  }
   load(id: number | string) {
    this.http.get<User>(`${this.baseUrl}/users/${id}`).subscribe(data => {
       let notFound = true;

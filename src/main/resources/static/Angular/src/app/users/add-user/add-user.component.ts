@@ -2,9 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../user.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "ngx-custom-validators";
-import {NbToastrService} from "@nebular/theme";
+import { NbToastrService} from "@nebular/theme";
 import {MessageService} from "../../message/message.service";
 import {Subscription} from "rxjs";
+
 
 @Component({
   selector: 'app-add-user',

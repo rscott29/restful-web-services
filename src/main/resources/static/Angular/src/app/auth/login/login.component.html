@@ -27,7 +27,7 @@
                id="input-username"
                placeholder="User Name"
                autofocus
-               [status]="username.dirty ? (username.invalid  ? 'danger' : 'success') : ''"
+               [status]="username.dirty ? (username.invalid  ? 'danger' : 'success') : null"
                [required]="getConfigValue('forms.validation.username.required')"
                [attr.aria-invalid]="username.invalid && username.touched ? true : null">
         <ng-container *ngIf="username.invalid && username.touched">
@@ -50,7 +50,7 @@
                type="password"
                id="input-password"
                placeholder="Password"
-               [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
+               [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : null"
                [required]="getConfigValue('forms.validation.password.required')"
                [minlength]="getConfigValue('forms.validation.password.minLength')"
                [maxlength]="getConfigValue('forms.validation.password.maxLength')"

@@ -3,6 +3,7 @@ package com.scottTech.rest.webservices.userservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.hateoas.client.LinkDiscoverer;
 import org.springframework.hateoas.client.LinkDiscoverers;
 import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDiscoverer;
@@ -17,10 +18,13 @@ import java.util.List;
 import java.util.Locale;
 
 @SpringBootApplication
+@PropertySource("classpath:application.properties")
 public class RestfulWebServicesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestfulWebServicesApplication.class, args);
+		SpringApplication application = new SpringApplication(RestfulWebServicesApplication.class);
+		application.setAdditionalProfiles("ssl");
+		application.run(args);
 	}
 	@Bean
 	public LocaleResolver localeResolver () {
@@ -41,7 +45,7 @@ public class RestfulWebServicesApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("GET","POST","PUT");
+				registry.addMapping("/**").allowedOrigins("https://localhost:4200").allowedMethods("GET","POST","PUT");
 
 			}
 		};

@@ -1,21 +1,21 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {UserListComponent} from "./User/user-list/user-list.component";
-import {LayoutComponent} from "./layout/layout.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 
 const routes: Routes = [
     {
+        path: '',
+        redirectTo: '/login',
+        pathMatch: 'full',
+        canActivate: [ AuthGuard]
+    },
+    {
         path: 'home',
-        component: LayoutComponent,
-        children: [
-            {
-                path: 'users',
-                component: UserListComponent,
-                pathMatch: 'full'
-            }
-        ]
-    }
+        loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
+        canActivate: [AuthGuard]
+    },
+
 ];
 
 @NgModule({

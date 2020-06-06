@@ -6,6 +6,7 @@ import {RouterModule} from "@angular/router";
 import {NbAlertModule, NbButtonModule, NbCheckboxModule, NbInputModule} from "@nebular/theme";
 import {AuthRoutingModule} from "./auth-routing.module";
 import { NbAuthModule } from '@nebular/auth';
+import {AuthGuard} from "./auth.guard";
 
 
 @NgModule({
@@ -24,6 +25,9 @@ import { NbAuthModule } from '@nebular/auth';
     NbCheckboxModule,
     AuthRoutingModule,
     NbAuthModule,
+  ],
+  providers: [
+      AuthGuard
   ]
 })
 export class AuthModule { }

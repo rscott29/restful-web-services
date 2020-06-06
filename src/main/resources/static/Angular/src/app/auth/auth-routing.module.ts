@@ -3,20 +3,19 @@ import {RouterModule, Routes} from "@angular/router";
 import {NbAuthComponent} from "@nebular/auth";
 import {LoginComponent} from "./login/login.component";
 
-export const routes: Routes = [
-    {
-        path: 'auth',
-        component: NbAuthComponent,
-        loadChildren: '../auth/auth.module#AuthModule',
 
-    },
+export const routes: Routes = [
+
+
     {
         path: '',
         component: NbAuthComponent,
+
         children: [
             {
                 path: 'login',
-                component: LoginComponent
+                component: LoginComponent,
+
             }
         ],
     }

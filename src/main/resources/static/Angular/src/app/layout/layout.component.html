@@ -23,14 +23,18 @@
 
   <nb-sidebar state="compacted" (mouseover)="toggleCompact()" (mouseout)="toggleCompact()">
 
-    <nb-menu  [items]="items" class="mt-50">
+    <nb-menu [items]="items" class="mt-50">
 
     </nb-menu>
 
   </nb-sidebar>
 
   <nb-layout-column>
-    <router-outlet></router-outlet>
+<!--    <router-outlet></router-outlet>-->
+
+    <div class="anchor">
+      <ng-container #anchor></ng-container>
+    </div>
 
 
   </nb-layout-column>
